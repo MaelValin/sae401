@@ -1,10 +1,12 @@
+import App from '../App.tsx';
+
 
 export default function Root() {
 
   return (
     <>
       <section>
-        Hello World !
+       <App />
       </section>
     </>
   );

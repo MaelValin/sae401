@@ -27,7 +27,7 @@ const buttonVariants = cva("rounded-md font-medium focus:outline-none", {
 // Interface simplifiée avec uniquement les props nécessaires
 
 interface ButtonProps {
-  variant?: "default" | "destructive";
+  variant?: "default" | "destructive" | "emerald";
   size?: "default" | "sm" | "lg";
   children?: React.ReactNode;
   className?: string;
