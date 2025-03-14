@@ -21,7 +21,7 @@ export default function Dashmember() {
           publieText={false}
           publie={false}
           returnbutton={true}
-          name="Membres"
+          name={member.pseudo}
           linkpublie=""
           linkreturn="/dashboard"
         />
@@ -32,7 +32,6 @@ export default function Dashmember() {
           title="Pseudo"
           titletext={true}
           validitertext={false}
-          validiter={false}
           textvalider="Pseudo validé"
           textinvalider="Pseudo invalide"
           difficulty={false}
@@ -44,8 +43,7 @@ export default function Dashmember() {
             name="Mail"
             title="Mail"
             titletext={true}
-            validitertext={false}
-            validiter={false}
+            validitertext={true}
             textvalider="Mail validé"
             textinvalider="Mail invalide"
             difficulty={false}
