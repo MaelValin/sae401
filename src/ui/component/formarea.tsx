@@ -1,16 +1,18 @@
 import { useState } from "react";
 
+// Interface pour définir les variantes possibles des champs
 interface FormAreaProps {
-  name: string;
+  name: "pseudo" | "mail" | "mot de passe" | "confirmer mot de passe";
   title: string;
   titletext?: boolean;
-  validitertext?: boolean;
   textvalider?: string;
   textinvalider?: string;
   difficulty?: boolean;
   variantdifficulty?: (value: string) => number;
   valuetext?: string;
   valueactive?: boolean;
+  validitertext?: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function FormArea({
@@ -33,41 +35,61 @@ export default function FormArea({
     difficultyLevel < 7 ? "Easy" :
     difficultyLevel < 12 ? "Medium" : "Hard";
 
-  // Logique de validation pour l'email
+  // Validation spécifique pour chaque champ
   const isValidEmail =
-    name.toLowerCase() === "mail"
+    name === "mail"
       ? inputValue.includes('@') && inputValue.includes('.') && !inputValue.endsWith('.')
       : true;
 
-  // Validation basée sur la longueur
-  const isValidLength = inputValue.length >= 12; // Par exemple, longueur minimale de 12 caractères
+  const isValidPassword = name === "mot de passe" ? inputValue.length >= 8 : true;
 
-  // Validation spécifique pour chaque champ
-  const validationText =
-    inputValue.length === 0
-      ? "" // Aucun texte si 0 caractères
-      : name.toLowerCase() === "mail"
-      ? isValidEmail
-        ? textvalider // Afficher textvalider si l'email est valide
-        : textinvalider // Afficher textinvalider si l'email est invalide
-      : isValidLength
-      ? textvalider // Afficher textvalider si la longueur est valide
-      : textinvalider; // Afficher textinvalider si la longueur est invalide
+  const isPasswordMatch =
+    name === "confirmer mot de passe" ? inputValue === valuetext : true;
+
+  const isValidLength = name !== "mail" && name !== "confirmer mot de passe" ? inputValue.length >= 4 : true;
+
+  // Modifier la validation pour le cas du "Confirmer mot de passe"
+  const validationText = () => {
+    if (inputValue.length === 0) return ""; // Aucun texte si 0 caractères
+
+    switch (name) {
+      case "mail":
+        return isValidEmail
+          ? textvalider // Si l'email est valide
+          : textinvalider; // Si l'email est invalide
+      case "mot de passe":
+        return isValidPassword
+          ? textvalider // Si le mot de passe est valide
+          : textinvalider; // Si le mot de passe est invalide
+      case "confirmer mot de passe":
+        return isPasswordMatch
+          ? "Les mots de passe correspondent !" // Texte personnalisé pour confirmer que les mots de passe correspondent
+          : "Les mots de passe ne correspondent pas."; // Texte personnalisé si les mots de passe ne correspondent pas
+      default:
+        return isValidLength
+          ? textvalider // Si la longueur est valide
+          : textinvalider; // Si la longueur est invalide
+    }
+  };
 
   // Déterminer la couleur en fonction de la validation
-  const validationClass =
-    name.toLowerCase() === "mail" 
-      ? isValidEmail
-        ? "text-black" 
-        : "text-red-500"
-      : isValidLength
-      ? "text-black"
-      : "text-red-500";
+  const validationClass = () => {
+    switch (name) {
+      case "mail":
+        return isValidEmail ? "text-black" : "text-red-500";
+      case "mot de passe":
+        return isValidPassword ? "text-black" : "text-red-500";
+      case "confirmer mot de passe":
+        return isPasswordMatch ? "text-black" : "text-red-500";
+      default:
+        return isValidLength ? "text-black" : "text-red-500";
+    }
+  };
 
   return (
     <div className="flex flex-col items-start justify-center w-full gap-1">
       {titletext && <p className="text-black text-start text-sm w-full">{title}</p>}
-      
+
       <input
         className="text-black text-sm w-full p-2.5 rounded-sm text-start"
         style={{
@@ -75,7 +97,11 @@ export default function FormArea({
           stroke:
             "linear-gradient(90deg, rgba(2,0,96,1) 7%, rgba(20,105,173,1) 39%, rgba(86,12,181,1) 83%, rgba(0,77,193,1) 100%)",
         }}
-        type={name.toLowerCase().includes("mot de passe") ? "password" : "text"}
+        type={
+          name === "mot de passe" || name === "confirmer mot de passe"
+            ? "password"
+            : "text"
+        }
         name={name}
         id={name}
         maxLength={50}
@@ -84,11 +110,11 @@ export default function FormArea({
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      
+
       <div className="flex flex-row items-start justify-between w-full gap-1">
-        {validitertext && validationText && (
-          <p className={`text-start text-sm w-full ${validationClass}`}>
-            {validationText}
+        {validitertext && validationText() && (
+          <p className={`text-start text-sm w-full ${validationClass()}`}>
+            {validationText()}
           </p>
         )}
 

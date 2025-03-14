@@ -28,7 +28,7 @@ export default function Dashmember() {
       </div>
       <div className="flex flex-col items-center justify-center w-96 mt-10 px-10 pt-10 gap-2.5">
         <FormArea
-          name="Pseudonyme"
+          name="pseudo"
           title="Pseudo"
           titletext={true}
           validitertext={false}
@@ -40,7 +40,7 @@ export default function Dashmember() {
         />
         
           <FormArea
-            name="Mail"
+            name="mail"
             title="Mail"
             titletext={true}
             validitertext={true}
