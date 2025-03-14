@@ -1,2 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+    :root {
+        --bluelight: #0038FF;
+        --dark: #202020;
+        --bluemeduim: #1872B4;
+        --bluedark: #030081;
+    }
+}
+

@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "pseudo": "john_doe",
+        "mail": "john_doe@example.com"
+    },
+    {
+        "id": 2,
+        "pseudo": "jane_smith",
+        "mail": "jane_smith@example.com"
+    },
+    {
+        "id": 3,
+        "pseudo": "alice_jones",
+        "mail": "alice_jones@example.com"
+    },
+    {
+        "id": 4,
+        "pseudo": "bob_brown",
+        "mail": "bob_brown@example.com"
+    },
+    {
+        "id": 5,
+        "pseudo": "charlie_black",
+        "mail": "charlie_black@example.com"
+    },
+    {
+        "id": 6,
+        "pseudo": "david_white",
+        "mail": "david_white@example.com"
+    },
+    {
+        "id": 7,
+        "pseudo": "eve_green",
+        "mail": "eve_green@example.com"
+    },
+    {
+        "id": 8,
+        "pseudo": "frank_yellow",
+        "mail": "frank_yellow@example.com"
+    },
+    {
+        "id": 9,
+        "pseudo": "grace_blue",
+        "mail": "grace_blue@example.com"
+    },
+    {
+        "id": 10,
+        "pseudo": "henry_red",
+        "mail": "henry_red@example.com"
+    },
+    {
+        "id": 11,
+        "pseudo": "irene_purple",
+        "mail": "irene_purple@example.com"
+    },
+    {
+        "id": 12,
+        "pseudo": "jack_orange",
+        "mail": "jack_orange@example.com"
+    }
+]
